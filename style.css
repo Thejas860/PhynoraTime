@@ -1,77 +1,224 @@
-/* ===== RESPONSIVE FIX FOR ALL DEVICES ===== */
+/* ===== PHYNORATIME — CLEAN VIOLET THEME (RESPONSIVE) ===== */
 
-/* For mobile phones */
-@media (max-width: 768px) {
-  body {
-    padding: 10px;
-    font-size: 15px;
-  }
+/* --- Theme tokens --- */
+:root{
+  /* page + text */
+  --bg: radial-gradient(1200px 600px at 50% -200px, #6f4cff22, transparent), #2c1e8f;
+  --ink:#0b1020;
+  --muted:#cfd2ff;
 
-  .wrap {
-    padding: 10px;
-  }
+  /* cards */
+  --panel:#5b2be0;
+  --panel-2:#4a22c3;
+  --violet-border:#7c5cff;
 
-  .card {
-    padding: 14px;
-    border-radius: 14px;
-  }
+  /* accents */
+  --accent:#22b37e;
+  --accent2:#3c69ff;
 
-  .grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on phones */
-    gap: 10px;
-  }
-
-  .value {
-    font-size: 30px; /* smaller counters */
-  }
-
-  .controls {
-    grid-template-columns: 1fr;
-  }
-
-  .control-row.grid {
-    grid-template-columns: 1fr;
-  }
-
-  .duration-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  h1 {
-    font-size: 22px;
-  }
-
-  .sub {
-    font-size: 13px;
-  }
-
-  .btn,
-  .ok {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .tile {
-    padding: 12px;
-    font-size: 14px;
-  }
-
-  .label {
-    font-size: 11px;
-  }
-
-  .g {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .g .tools {
-    flex-wrap: wrap;
-  }
-
-  /* Fix background color contrast for phone */
-  body {
-    background: #ffffff;
-    color: #0b1020;
-  }
+  /* keep for future UI color picker */
+  --switch-color:#00f5ff;
 }
+
+/* --- Base --- */
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color:#ffffff; /* default white on the violet page */
+  font: 500 16px/1.5 system-ui, Segoe UI, Inter, Arial;
+}
+
+.wrap{ max-width:1100px; margin:28px auto; padding:0 16px 24px; }
+
+/* Header */
+.top .brand-row{ display:flex; align-items:center; gap:10px; }
+.top .mini{ width:32px; height:32px; border-radius:8px; }
+h1{ margin:0; font-size:32px; font-weight:900; color:#ffffff; }      /* ← brand title white */
+.sub{ margin:6px 0 18px; color:#e9e7ff; }                            /* ← subtitle white-ish */
+
+/* --- Cards / sections (violet blocks) --- */
+.card{
+  background: var(--panel);
+  color:#fff;
+  border:1px solid var(--violet-border);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 26px rgba(91,43,224,.25);
+  margin-bottom:16px;
+}
+.card-title{ font-weight:800; font-size:20px; margin-bottom:8px; color:#fff; }
+.muted{ color:#e9e7ff; font-size:14px; margin:6px 0; }
+
+/* --- Controls on violet --- */
+.controls{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:10px 0; }
+.controls label{ display:flex; flex-direction:column; gap:6px; font-size:13px; color:#e9e7ff; }
+
+.controls input,
+.controls button,
+.controls .ok,
+.controls--add input,
+.field input,
+.btn {
+  background: var(--panel-2);
+  color:#fff;
+  border:1px solid var(--violet-border);
+  border-radius:12px;
+  padding:10px 12px;
+  font-weight:600;
+}
+
+.btn.btn-primary,
+.controls .ok{
+  background: linear-gradient(180deg,#6a3df0,#4a22c3);
+  cursor:pointer;
+}
+
+/* Add-goal row layout */
+.controls--add{ grid-template-columns:1fr auto; }
+
+/* --- Progress --- */
+.progress .bar{
+  height:14px;
+  border-radius:999px;
+  background: rgba(255,255,255,.12);
+  border:1px solid var(--violet-border);
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  width:0;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow: 0 0 14px rgba(138,160,255,.45) inset, 0 0 12px rgba(51,226,159,.35);
+}
+.legend{ display:flex; justify-content:space-between; color:#efeefe; font-size:12px; margin-top:6px; }
+
+/* --- Counter tiles --- */
+.grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px; }
+.tile{
+  background: var(--panel-2);
+  border:1px solid var(--violet-border);
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  color:#fff;
+}
+.label{
+  font-size:12px;
+  text-transform:uppercase;
+  color:#ffffff;
+  letter-spacing:.18em;
+  opacity:.9;
+}
+.value{ font-size:46px; font-weight:800; margin-top:4px; color:#fff; }
+
+/* --- Duration builder --- */
+.control-row.grid{ display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:14px; align-items:end; }
+.duration-card{ margin-top:14px; background: rgba(255,255,255,0.06); border-radius:12px; padding:12px; }
+.duration-title{ font-weight:700; margin-bottom:8px; color:#e9e7ff; }
+.duration-grid{ display:grid; grid-template-columns: repeat(8, minmax(80px,1fr)); gap:10px; }
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field.small input{ padding:.55rem .7rem; }
+.hint{ opacity:.85; font-size:.9rem; color:#e9e7ff; }
+
+/* --- Goals list --- */
+.goals{ display:grid; gap:10px; margin-top:10px; }
+
+/* Keep goal rows white for contrast on violet */
+.g{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  background:#ffffff;
+  border:1px solid #d1c4e9;
+  border-radius:12px;
+  padding:12px 14px;
+  box-shadow:0 3px 6px rgba(0,0,0,0.08);
+}
+.g .name{ font-weight:700; color:#6b00b6; }
+.g .tools{ display:flex; gap:8px; }
+
+/* Buttons on goal row */
+.btn.edit{
+  background: linear-gradient(145deg, #7c3aed, #6d28d9);
+  color:#ffffff;
+  border: 1px solid #8b5cf6;
+  border-radius:25px;
+  padding:6px 16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.btn.edit:hover{ background: linear-gradient(145deg, #8b5cf6, #7c3aed); }
+
+.btn.delete{
+  background: linear-gradient(145deg, #ff1e1e, #cc0000);
+  color:#fff;
+  border:1px solid #b00000;
+  border-radius:25px;
+  padding:6px 16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .25s ease;
+  box-shadow: 0 3px 8px rgba(255, 0, 0, 0.25);
+}
+.btn.delete:hover{ background: linear-gradient(145deg, #ff0000, #b30000); transform: translateY(-2px); }
+
+/* Goal checkbox */
+.g input[type="checkbox"]{
+  width:20px; height:20px; accent-color:#22c55e; cursor:pointer; transform:scale(1.1);
+}
+.g input[type="checkbox"]:checked{ accent-color:#16a34a; }
+.edit-field{
+  border: 1px solid #bfa8ff; border-radius: 8px; padding: 6px 10px;
+  font-weight:700; color:#6b00b6; background:#f4f0ff; outline:none; transition:.3s;
+}
+.edit-field:focus{ border-color:#6b00b6; background:#ffffff; }
+
+/* --- Inputs: remove time spinners, keep date clean --- */
+input[type="date"]{
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px){
+  .control-row.grid{ grid-template-columns:1fr; }
+  .duration-grid{ grid-template-columns: repeat(4, minmax(90px,1fr)); }
+  .grid{ grid-template-columns: repeat(2,1fr); }
+  .value{ font-size:40px; }
+}
+
+/* ===== PHONE OPTIMIZATIONS (no white page!) ===== */
+@media (max-width: 768px) {
+  body{
+    padding:10px;
+    /* keep the violet background on phones too */
+    background: var(--bg);
+    color:#ffffff;
+  }
+
+  .wrap{ padding:10px; }
+
+  .card{ padding:14px; border-radius:14px; }
+
+  .grid{ grid-template-columns: repeat(2, 1fr); gap:10px; }
+
+  .value{ font-size:32px; }
+
+  .controls{ grid-template-columns:1fr; }
+  .control-row.grid{ grid-template-columns:1fr; }
+  .duration-grid{ grid-template-columns: repeat(4, 1fr); }
+
+  h1{ font-size:26px; }
+  .sub{ font-size:13px; }
+
+  .btn, .ok{ font-size:14px; padding:10px; }
+  .tile{ padding:14px; }
+  .label{ font-size:11px; }
+
+  .g{ flex-direction:column; align-items:flex-start; }
+  .g .tools{ flex-wrap:wrap; }
+}
+
+
